@@ -21,3 +21,6 @@ Eine iOS-Anwendung zum Monitoring von physischer und mentaler Erholung im Sport.
 1.  Repo klonen.
 2.  In Xcode 15+ öffnen.
 3.  Target auf iOS 17+ setzen und starten.
+
+---
+*© 2025 Jannik*
