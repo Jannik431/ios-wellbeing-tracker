@@ -24,25 +24,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		A29FD4082EDE3C40000075E7 /* ios-wellbeing-tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-wellbeing-tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A29FD41A2EDE3C43000075E7 /* ios-wellbeing-trackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ios-wellbeing-trackerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A29FD4242EDE3C43000075E7 /* ios-wellbeing-trackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ios-wellbeing-trackerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A29FD41A2EDE3C43000075E7 /* ios-wellbeing-trackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "ios-wellbeing-trackerTests.xctest"; path = "/Users/jannikpasch/Desktop/ios-wellbeing-tracker/build/Debug-iphoneos/ios-wellbeing-tracker.app/PlugIns/ios-wellbeing-trackerTests.xctest"; sourceTree = "<absolute>"; };
+		A29FD4242EDE3C43000075E7 /* ios-wellbeing-trackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "ios-wellbeing-trackerUITests.xctest"; path = "/Users/jannikpasch/Desktop/ios-wellbeing-tracker/build/Debug-iphoneos/ios-wellbeing-trackerUITests-Runner.app/PlugIns/ios-wellbeing-trackerUITests.xctest"; sourceTree = "<absolute>"; };
+		A29FD43D2EDE3CBB000075E7 /* ios-wellbeing-tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "ios-wellbeing-tracker.app"; path = "/Users/jannikpasch/Desktop/ios-wellbeing-tracker/build/Debug-iphoneos/ios-wellbeing-tracker.app"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		A29FD40A2EDE3C40000075E7 /* ios-wellbeing-tracker */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "ios-wellbeing-tracker";
-			sourceTree = "<group>";
-		};
-		A29FD41D2EDE3C43000075E7 /* ios-wellbeing-trackerTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "ios-wellbeing-trackerTests";
-			sourceTree = "<group>";
-		};
-		A29FD4272EDE3C43000075E7 /* ios-wellbeing-trackerUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "ios-wellbeing-trackerUITests";
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -76,20 +66,7 @@
 			isa = PBXGroup;
 			children = (
 				A29FD40A2EDE3C40000075E7 /* ios-wellbeing-tracker */,
-				A29FD41D2EDE3C43000075E7 /* ios-wellbeing-trackerTests */,
-				A29FD4272EDE3C43000075E7 /* ios-wellbeing-trackerUITests */,
-				A29FD4092EDE3C40000075E7 /* Products */,
 			);
-			sourceTree = "<group>";
-		};
-		A29FD4092EDE3C40000075E7 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				A29FD4082EDE3C40000075E7 /* ios-wellbeing-tracker.app */,
-				A29FD41A2EDE3C43000075E7 /* ios-wellbeing-trackerTests.xctest */,
-				A29FD4242EDE3C43000075E7 /* ios-wellbeing-trackerUITests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -114,7 +91,7 @@
 			packageProductDependencies = (
 			);
 			productName = "ios-wellbeing-tracker";
-			productReference = A29FD4082EDE3C40000075E7 /* ios-wellbeing-tracker.app */;
+			productReference = A29FD43D2EDE3CBB000075E7 /* ios-wellbeing-tracker.app */;
 			productType = "com.apple.product-type.application";
 		};
 		A29FD4192EDE3C43000075E7 /* ios-wellbeing-trackerTests */ = {
@@ -129,9 +106,6 @@
 			);
 			dependencies = (
 				A29FD41C2EDE3C43000075E7 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				A29FD41D2EDE3C43000075E7 /* ios-wellbeing-trackerTests */,
 			);
 			name = "ios-wellbeing-trackerTests";
 			packageProductDependencies = (
@@ -153,9 +127,6 @@
 			dependencies = (
 				A29FD4262EDE3C43000075E7 /* PBXTargetDependency */,
 			);
-			fileSystemSynchronizedGroups = (
-				A29FD4272EDE3C43000075E7 /* ios-wellbeing-trackerUITests */,
-			);
 			name = "ios-wellbeing-trackerUITests";
 			packageProductDependencies = (
 			);
@@ -175,6 +146,7 @@
 				TargetAttributes = {
 					A29FD4072EDE3C40000075E7 = {
 						CreatedOnToolsVersion = 26.1.1;
+						LastSwiftMigration = 2610;
 					};
 					A29FD4192EDE3C43000075E7 = {
 						CreatedOnToolsVersion = 26.1.1;
@@ -196,7 +168,7 @@
 			mainGroup = A29FD3FF2EDE3C40000075E7;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = A29FD4092EDE3C40000075E7 /* Products */;
+			productRefGroup = A29FD3FF2EDE3C40000075E7;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -395,6 +367,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8H492ZU48P;
@@ -416,6 +389,8 @@
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "ios-wellbeing-tracker/ios-wellbeing-tracker-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -427,6 +402,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8H492ZU48P;
@@ -448,6 +424,7 @@
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "ios-wellbeing-tracker/ios-wellbeing-tracker-Bridging-Header.h";
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
