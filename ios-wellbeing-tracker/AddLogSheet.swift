@@ -50,15 +50,35 @@ struct AddLogSheet: View {
     
     private var recoverySection: some View {
         Section("Körper & Erholung") {
-            SliderView(value: $sleepQuality, label: "Schlaf", icon: "bed.double.fill", color: .green)
-            SliderView(value: $muscleSoreness, label: "Muskelkater", icon: "flame.fill", color: .red)
+            SliderView(
+                        value: $sleepQuality,
+                        label: "Schlaf",
+                        icon: "bed.double.fill",
+                        color: .green,
+                        description: getSleepDescirption
+                        )
+            
+            SliderView(value: $muscleSoreness,
+                       label: "Muskelkater",
+                       icon: "flame.fill",
+                       color: .red,
+                       description: getSorenessDescription)
         }
     }
     
     private var mentalSection: some View {
         Section("Mental & Training") {
-            SliderView(value: $mood, label: "Stimmung", icon: "face.smiling", color: .blue)
-            SliderView(value: $trainingLoad, label: "Belastung", icon: "dumbbell.fill", color: .orange)
+            SliderView(value: $mood,
+                       label: "Stimmung",
+                       icon: "face.smiling",
+                       color: .blue,
+                       description: getMoodDescription)
+            
+            SliderView(value: $trainingLoad,
+                       label: "Belastung",
+                       icon: "dumbbell.fill",
+                       color: .orange,
+                       description: getLoadDescription)
         }
     }
     
@@ -69,8 +89,51 @@ struct AddLogSheet: View {
         }
     }
     
-    // MARK: - Actions
+    // MARK: - Beschreibungs-Logik
+    func getSleepDescirption(val: Int) -> String {
+        switch val {
+        case 1...2: return "Katastrophal (Kaum geschlafen)"
+        case 3...4: return "Schlecht (Oft wach)"
+        case 5...6: return "Geht so (Durchschnitt)"
+        case 7...8: return "Gut (Erholt)"
+        case 9...10: return "Perfekt (Tief & Fest)"
+        default: return ""
+        }
+    }
     
+    func getSorenessDescription(val: Int) -> String{
+        switch val {
+        case 1...2: return "Keiner"
+        case 3...4: return "Leicht"
+        case 5...6: return "Mittel"
+        case 7...8: return "Stark (Schmerzhaft)"
+        case 9...10: return "Extrem (kaum Bewegung möglich)"
+        default: return ""
+        }
+    }
+    
+    func getMoodDescription(val: Int) -> String {
+        switch val {
+        case 1...3: return "Gestresst / Demotiviert"
+        case 4...6: return "Neutral"
+        case 7...10: return "Motiviert / Energisch"
+        default: return ""
+        }
+    }
+        
+    func getLoadDescription(val: Int) -> String {
+        switch val {
+        case 1...2: return "Ruhetag"
+        case 3...5: return "Leichtes Training"
+        case 6...8: return "Hartes Training"
+        case 9...10: return "Maximal (Wettkampf/Limit)"
+        default: return ""
+        }
+    }
+        
+        
+        // MARK: - Actions
+        
     private func saveLog() {
         let newLog = DailyCheckIn(
             date: date,
@@ -84,23 +147,36 @@ struct AddLogSheet: View {
         
         dismiss()
     }
-}
-
-// Kleine wiederverwendbare Komponente nur für diese Datei
-fileprivate struct SliderView: View {
-    @Binding var value: Double
-    let label: String
-    let icon: String
-    let color: Color
-    
-    var body: some View {
-        VStack(alignment: .leading) {
-            HStack {
-                Label(label, systemImage: icon).foregroundStyle(color)
-                Spacer()
-                Text("\(Int(value))/10").bold().foregroundStyle(.secondary)
+        
+    // Kleine wiederverwendbare Komponente nur für diese Datei
+    fileprivate struct SliderView: View {
+        @Binding var value: Double
+        let label: String
+        let icon: String
+        let color: Color
+        
+        var description: (Int) -> String
+        
+        var body: some View {
+            VStack(alignment: .leading, spacing: 8) {
+                HStack {
+                    Label(label, systemImage: icon)
+                        .foregroundStyle(color)
+                        .fontWeight(.medium)
+                    Spacer()
+                    Text("\(Int(value))/10")
+                        .font(.headline)
+                        .monospacedDigit()
+                }
+                Slider(value: $value, in: 1...10, step: 1)
+                    .tint(color)
+                Text(description(Int(value)))
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .animation(.snappy, value: value)
             }
-            Slider(value: $value, in: 1...10, step: 1)
+            .padding(.vertical, 4)
         }
     }
 }

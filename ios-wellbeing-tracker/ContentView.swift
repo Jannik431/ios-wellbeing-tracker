@@ -9,19 +9,22 @@ import SwiftData
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
+    
+    // Sortiert die neuesten Einträge nach oben
     @Query(sort: \DailyCheckIn.date, order: .reverse) private var logs: [DailyCheckIn]
+    
     @State private var showAddSheet = false
 
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
-                // 1. Chart (Nur wenn Daten da sind)
+                // 1. Chart (Nur anzeigen wenn Daten da sind)
                 if !logs.isEmpty {
                     WellbeingChartView(logs: logs)
                         .padding(.vertical, 10)
                 }
                 
-                // 2. Liste
+                // 2. Die Liste mit dem Readiness Score
                 logList
             }
             .navigationTitle("Athlete Monitor")
@@ -50,28 +53,49 @@ struct ContentView: View {
                     description: Text("Starte dein Tracking mit +")
                 )
             } else {
-                // FIX: Wir nutzen 'id: \.self', damit SwiftData Objekte eindeutig erkennt
                 ForEach(logs, id: \.self) { log in
-                    HStack {
-                        VStack(alignment: .leading) {
-                            // FIX: Statt '.friendlyFormat' nutzen wir Standard-SwiftUI.
-                            // Das behebt den Fehler, falls die Extension-Datei fehlt.
-                            Text(log.date.formatted(date: .abbreviated, time: .omitted))
-                                .font(.headline)
+                    HStack(spacing: 16) {
+                        // NEU: Der Readiness Score als Kreis links
+                        // (Benötigt die Datei DailyCheckIn+Logic.swift)
+                        ZStack {
+                            Circle()
+                                .stroke(log.readinessColor.opacity(0.3), lineWidth: 4)
+                                .frame(width: 50, height: 50)
                             
+                            Text("\(log.readinessScore)")
+                                .font(.system(size: 16, weight: .bold))
+                                .foregroundStyle(log.readinessColor)
+                        }
+                        
+                        VStack(alignment: .leading, spacing: 4) {
+                            // Status-Titel (z.B. "Einsatzbereit")
+                            Text(log.readinessTitle)
+                                .font(.headline)
+                                .foregroundStyle(log.readinessColor)
+                            
+                            // Datum
+                            Text(log.date.formatted(date: .abbreviated, time: .omitted))
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                            
+                            // Notizen anzeigen, falls vorhanden
                             if !log.notes.isEmpty {
                                 Text(log.notes)
-                                    .font(.caption)
+                                    .font(.caption2)
                                     .foregroundStyle(.secondary)
                                     .lineLimit(1)
+                                    .padding(.top, 2)
                             }
                         }
                         
                         Spacer()
                         
-                        StatusBadge(value: log.sleepQuality, color: .green)
-                        StatusBadge(value: log.muscleSoreness, color: .red)
+                        // Kleiner Pfeil nach rechts
+                        Image(systemName: "chevron.right")
+                            .font(.caption)
+                            .foregroundStyle(.tertiary)
                     }
+                    .padding(.vertical, 4)
                 }
                 .onDelete(perform: deleteItems)
             }
@@ -87,27 +111,17 @@ struct ContentView: View {
     }
 }
 
-// Helper View direkt in dieser Datei
-private struct StatusBadge: View {
-    let value: Int
-    let color: Color
-    
-    var body: some View {
-        Text("\(value)")
-            .font(.system(size: 14, weight: .bold))
-            .frame(width: 30, height: 30)
-            .background(color.opacity(0.15))
-            .foregroundStyle(color)
-            .clipShape(Circle())
-    }
-}
-
 // MARK: - Preview
 #Preview {
     let config = ModelConfiguration(isStoredInMemoryOnly: true)
     let container = try! ModelContainer(for: DailyCheckIn.self, configurations: config)
-    let dummy = DailyCheckIn(date: .now, sleepQuality: 8, muscleSoreness: 3, mood: 7, notes: "Test")
-    container.mainContext.insert(dummy)
+    
+    // Testdaten für die Preview
+    let log1 = DailyCheckIn(date: .now, sleepQuality: 9, muscleSoreness: 1, mood: 9, notes: "Topfit")
+    let log2 = DailyCheckIn(date: .now.addingTimeInterval(-86400), sleepQuality: 4, muscleSoreness: 8, mood: 3, notes: "Müde")
+    
+    container.mainContext.insert(log1)
+    container.mainContext.insert(log2)
+    
     return ContentView().modelContainer(container)
 }
-

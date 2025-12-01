@@ -24,9 +24,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		A29FD41A2EDE3C43000075E7 /* ios-wellbeing-trackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "ios-wellbeing-trackerTests.xctest"; path = "/Users/jannikpasch/Desktop/ios-wellbeing-tracker/build/Debug-iphoneos/ios-wellbeing-tracker.app/PlugIns/ios-wellbeing-trackerTests.xctest"; sourceTree = "<absolute>"; };
-		A29FD4242EDE3C43000075E7 /* ios-wellbeing-trackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "ios-wellbeing-trackerUITests.xctest"; path = "/Users/jannikpasch/Desktop/ios-wellbeing-tracker/build/Debug-iphoneos/ios-wellbeing-trackerUITests-Runner.app/PlugIns/ios-wellbeing-trackerUITests.xctest"; sourceTree = "<absolute>"; };
-		A29FD43D2EDE3CBB000075E7 /* ios-wellbeing-tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "ios-wellbeing-tracker.app"; path = "/Users/jannikpasch/Desktop/ios-wellbeing-tracker/build/Debug-iphoneos/ios-wellbeing-tracker.app"; sourceTree = "<absolute>"; };
+		A29FD44E2EDE3FD8000075E7 /* ios-wellbeing-tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-wellbeing-tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2A5B7672EDF1C4200DE77F0 /* ios-wellbeing-trackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ios-wellbeing-trackerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2A5B7682EDF1C4200DE77F0 /* ios-wellbeing-trackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ios-wellbeing-trackerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -66,6 +66,9 @@
 			isa = PBXGroup;
 			children = (
 				A29FD40A2EDE3C40000075E7 /* ios-wellbeing-tracker */,
+				A29FD44E2EDE3FD8000075E7 /* ios-wellbeing-tracker.app */,
+				A2A5B7672EDF1C4200DE77F0 /* ios-wellbeing-trackerTests.xctest */,
+				A2A5B7682EDF1C4200DE77F0 /* ios-wellbeing-trackerUITests.xctest */,
 			);
 			sourceTree = "<group>";
 		};
@@ -91,7 +94,7 @@
 			packageProductDependencies = (
 			);
 			productName = "ios-wellbeing-tracker";
-			productReference = A29FD43D2EDE3CBB000075E7 /* ios-wellbeing-tracker.app */;
+			productReference = A29FD44E2EDE3FD8000075E7 /* ios-wellbeing-tracker.app */;
 			productType = "com.apple.product-type.application";
 		};
 		A29FD4192EDE3C43000075E7 /* ios-wellbeing-trackerTests */ = {
@@ -111,7 +114,7 @@
 			packageProductDependencies = (
 			);
 			productName = "ios-wellbeing-trackerTests";
-			productReference = A29FD41A2EDE3C43000075E7 /* ios-wellbeing-trackerTests.xctest */;
+			productReference = A2A5B7672EDF1C4200DE77F0 /* ios-wellbeing-trackerTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		A29FD4232EDE3C43000075E7 /* ios-wellbeing-trackerUITests */ = {
@@ -131,7 +134,7 @@
 			packageProductDependencies = (
 			);
 			productName = "ios-wellbeing-trackerUITests";
-			productReference = A29FD4242EDE3C43000075E7 /* ios-wellbeing-trackerUITests.xctest */;
+			productReference = A2A5B7682EDF1C4200DE77F0 /* ios-wellbeing-trackerUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -389,7 +392,7 @@
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "ios-wellbeing-tracker/ios-wellbeing-tracker-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
@@ -424,7 +427,7 @@
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "ios-wellbeing-tracker/ios-wellbeing-tracker-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
