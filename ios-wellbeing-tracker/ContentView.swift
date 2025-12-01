@@ -54,48 +54,49 @@ struct ContentView: View {
                 )
             } else {
                 ForEach(logs, id: \.self) { log in
-                    HStack(spacing: 16) {
-                        // NEU: Der Readiness Score als Kreis links
-                        // (Benötigt die Datei DailyCheckIn+Logic.swift)
-                        ZStack {
-                            Circle()
-                                .stroke(log.readinessColor.opacity(0.3), lineWidth: 4)
-                                .frame(width: 50, height: 50)
-                            
-                            Text("\(log.readinessScore)")
-                                .font(.system(size: 16, weight: .bold))
-                                .foregroundStyle(log.readinessColor)
-                        }
-                        
-                        VStack(alignment: .leading, spacing: 4) {
-                            // Status-Titel (z.B. "Einsatzbereit")
-                            Text(log.readinessTitle)
-                                .font(.headline)
-                                .foregroundStyle(log.readinessColor)
-                            
-                            // Datum
-                            Text(log.date.formatted(date: .abbreviated, time: .omitted))
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
-                            
-                            // Notizen anzeigen, falls vorhanden
-                            if !log.notes.isEmpty {
-                                Text(log.notes)
-                                    .font(.caption2)
-                                    .foregroundStyle(.secondary)
-                                    .lineLimit(1)
-                                    .padding(.top, 2)
+                    NavigationLink(destination: EditLogView(log: log)) {
+                        HStack(spacing: 16) {
+                            // Readiness Score
+                            ZStack {
+                                Circle()
+                                    .stroke(log.readinessColor.opacity(0.3), lineWidth: 4)
+                                    .frame(width: 50, height: 50)
+                                
+                                Text("\(log.readinessScore)")
+                                    .font(.system(size: 16, weight: .bold))
+                                    .foregroundStyle(log.readinessColor)
                             }
+                            
+                            VStack(alignment: .leading, spacing: 4) {
+                                // Status-Titel
+                                Text(log.readinessTitle)
+                                    .font(.headline)
+                                    .foregroundStyle(log.readinessColor)
+                                
+                                // Datum
+                                Text(log.date.formatted(date: .abbreviated, time: .omitted))
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                                
+                                // Notizen anzeigen
+                                if !log.notes.isEmpty {
+                                    Text(log.notes)
+                                        .font(.caption2)
+                                        .foregroundStyle(.secondary)
+                                        .lineLimit(1)
+                                        .padding(.top, 2)
+                                }
+                            }
+                            
+                            Spacer()
+                            
+                            // Kleiner Pfeil nach rechts
+                            Image(systemName: "chevron.right")
+                                .font(.caption)
+                                .foregroundStyle(.tertiary)
                         }
-                        
-                        Spacer()
-                        
-                        // Kleiner Pfeil nach rechts
-                        Image(systemName: "chevron.right")
-                            .font(.caption)
-                            .foregroundStyle(.tertiary)
+                        .padding(.vertical, 4)
                     }
-                    .padding(.vertical, 4)
                 }
                 .onDelete(perform: deleteItems)
             }
