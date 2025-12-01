@@ -18,6 +18,7 @@ struct AddLogSheet: View {
     @State private var mood = 7.0
     @State private var trainingLoad = 5.0
     @State private var note = ""
+    @State private var showDuplicateAlert = false
     
     var body: some View {
         NavigationStack {
@@ -34,8 +35,14 @@ struct AddLogSheet: View {
                     Button("Abbrechen") { dismiss() }
                 }
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Speichern", action: saveLog)
+                    Button("Speichern", action: checkAndSave)
                 }
+            }
+            // Alarm-Fenster
+            .alert("Eintrag existiert bereits", isPresented: $showDuplicateAlert) {
+                Button("OK", role: .cancel) {}
+            } message: {
+                Text("Du hast für diesen Tag bereits einen Eintrag erstellt. Bitte wähle ein anderes Datum oder bearbeite den existierenden Eintrag in der Liste.")
             }
         }
     }
@@ -132,7 +139,33 @@ struct AddLogSheet: View {
     }
         
         
-        // MARK: - Actions
+    // MARK: - Actions & Validierung
+    private func checkAndSave() {
+        // Zeitraum ausgewählter Tag definieren
+        let calendar = Calendar.current
+        let startOfDay = calendar.startOfDay(for: date)
+        guard let endOfDay = calendar.date(byAdding: .day, value: 1, to: startOfDay) else { return }
+        
+        // Suchanfrage an Datenbank
+        let predicate = #Predicate<DailyCheckIn> { log in log.date >= startOfDay && log.date < endOfDay
+        }
+        let descriptor = FetchDescriptor<DailyCheckIn>(predicate: predicate)
+        
+        // Auf Ergebnisse prüfen
+        do {
+            let count = try modelContext.fetchCount(descriptor)
+                    
+            if count > 0 {
+                // FEHLER: Es gibt schon einen Eintrag -> Alarm zeigen
+                showDuplicateAlert = true
+            } else {
+                // ALLES OK: Speichern
+                saveLog()
+            }
+        } catch {
+                    print("Fehler beim Prüfen auf Duplikate: \(error)")
+                }
+    }
         
     private func saveLog() {
         let newLog = DailyCheckIn(
@@ -144,7 +177,6 @@ struct AddLogSheet: View {
             notes: note
         )
         modelContext.insert(newLog)
-        
         dismiss()
     }
         
