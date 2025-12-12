@@ -8,12 +8,18 @@ import SwiftData
 import SwiftUI
 
 struct EditLogView: View {
+    @Environment(\.modelContext) private var modelContext
     @Bindable var log: DailyCheckIn
+    
+    @State private var originalDate: Date = Date()
+    
+    @State private var showDuplicateAlert = false
     
     var body: some View {
         Form {
             Section("Datum") {
                 DatePicker("Zeitpunkt", selection: $log.date, displayedComponents: .date)
+                    .onChange(of: log.date) {oldValue, newValue in checkForDuplicateDate(newDate: newValue)}
             }
             
             Section("Körper & Erholung") {
@@ -71,7 +77,50 @@ struct EditLogView: View {
         }
         .navigationTitle("Eintrag bearbeiten")
         .navigationBarTitleDisplayMode(.inline)
+        
+        // Alert bei Duplikate
+        .alert("Einntrag existiert bereits", isPresented: $showDuplicateAlert) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text("Du hast für dieses Datum bereits einen anderen Eintrag. Die Änderung wurde zurückgesetzt, um Datenverlust zu vermeiden.")
+        }
+        .onAppear {
+            // Speichern des Orignaldatums beim ersten Laden
+            originalDate = log.date
+        }
     }
+    // MARK: - Validierung
+    private func checkForDuplicateDate(newDate: Date) {
+        let calendar = Calendar.current
+        let startOfDay = calendar.startOfDay(for: newDate)
+        guard let endOfDay = calendar.date(byAdding: .day, value: 1, to: startOfDay) else { return }
+            
+        let datePredicate = #Predicate<DailyCheckIn> { logEntry in
+            logEntry.date >= startOfDay &&
+            logEntry.date < endOfDay
+        }
+            
+        let descriptor = FetchDescriptor<DailyCheckIn>(predicate: datePredicate)
+            
+        do {
+            let potentialCollisions = try modelContext.fetch(descriptor)
+                
+            let collidingEntries = potentialCollisions.filter { fetchedLog in
+                return fetchedLog.persistentModelID != log.persistentModelID
+            }
+            if collidingEntries.count > 0 {
+                DispatchQueue.main.async {
+                    self.showDuplicateAlert = true
+                    self.log.date = self.originalDate
+                }
+            } else {
+                self.originalDate = newDate
+            }
+        } catch {
+            print("Fehler beim Prüfen auf Duplikate: \(error)")
+        }
+    }
+    
     // MARK: - Helper Logik (Kopie aus AddLogSheet)
         
     func getSleepDescription(val: Int) -> String {
