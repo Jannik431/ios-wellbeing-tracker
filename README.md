@@ -24,8 +24,8 @@ Eine iOS-Anwendung zum Monitoring von physischer und mentaler Erholung im Sport.
 ## 📸 Screenshots
 | Dashboard | Dateneingabe |
 | :--- | :----|
-| <img src="screenshots/dashboard1.png" width="250"> | <img src="screenshots/dateneingabe1.png" width="250"> |
-| <img src="screenshots/dashboard2.png" width="250"> | <img src="screenshots/dateneingabe2.png" width="250"> |
+| <img src="screenshots/dashboard1.PNG" width="250"> | <img src="screenshots/dateneingabe1.PNG" width="250"> |
+| <img src="screenshots/dashboard2.PNG" width="250"> | <img src="screenshots/dateneingabe2.PNG" width="250"> |
 
 ## 🚀 Installation
 1.  Repo klonen.
