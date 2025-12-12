@@ -48,6 +48,9 @@ struct ContentView: View {
             .sheet(isPresented: $showAddSheet) {
                 AddLogSheet()
             }
+            .sheet(isPresented: $showSettingsSheet) {
+                NotificationSettingsView()
+            }
         }
     }
     
