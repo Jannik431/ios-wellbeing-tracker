@@ -6,6 +6,7 @@
 //
 import SwiftUI
 import SwiftData
+import UserNotifications
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
@@ -14,6 +15,7 @@ struct ContentView: View {
     @Query(sort: \DailyCheckIn.date, order: .reverse) private var logs: [DailyCheckIn]
     
     @State private var showAddSheet = false
+    @State private var showSettingsSheet = false
 
     var body: some View {
         NavigationStack {
@@ -29,6 +31,13 @@ struct ContentView: View {
             }
             .navigationTitle("Athlete Monitor")
             .toolbar {
+                // Toolbar-Item für die Einstellungen
+                ToolbarItem(placement: .topBarLeading) {
+                    Button(action: { showSettingsSheet = true}) {
+                        Image(systemName: "gearshape")
+                    }
+                }
+                // Hinzufügen
                 ToolbarItem(placement: .primaryAction) {
                     Button(action: { showAddSheet = true }) {
                         Image(systemName: "plus.circle.fill")
